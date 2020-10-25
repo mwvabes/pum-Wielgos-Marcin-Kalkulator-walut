@@ -1,0 +1,12 @@
+{
+  "name": "pum-Wielgos-Marcin-Kalkulator-walut",
+  "displayName": "pum-Wielgos-Marcin-Kalkulator-walut",
+  "expo": {
+    "name": "pum-Wielgos-Marcin-Kalkulator-walut",
+    "slug": "pum-Wielgos-Marcin-Kalkulator-walut",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
