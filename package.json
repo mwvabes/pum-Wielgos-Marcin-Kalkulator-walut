@@ -5,7 +5,9 @@
     "ios": "react-native run-ios",
     "web": "expo start --web",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --config ./webpack.config.js --mode"
   },
   "dependencies": {
     "axios": "^0.21.0",
