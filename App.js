@@ -32,9 +32,14 @@ const App = () => {
       &&
       !isNaN(destinationTextInput)
     ) {
-      refreshCalculation(lastChangedType)
+      if (lastChangedType == "destination" && destinationTextInput == 0) {
+        refreshCalculation("source")
+      } else {
+        refreshCalculation(lastChangedType)
+      }
+      
     }
-  }, [sourceTextInput, destinationTextInput, sourceSelect, destinationSelect])
+  }, [{sourceTextInput, destinationTextInput, sourceSelect, destinationSelect}])
 
   const handleTextInput = (text, type) => {
     if (type === "source") {
@@ -59,11 +64,11 @@ const App = () => {
   const refreshCalculation = (lastChangedType) => {
     if (lastChangedType === "source") {
       currenciesService.getByCurrencyValue(sourceSelect).then((response) => {
-        setDestinationTextInput(response.rates[destinationSelect] * sourceTextInput)
+        setDestinationTextInput((response.rates[destinationSelect] * sourceTextInput).toFixed(2))
       })
     } else {
       currenciesService.getByCurrencyValue(destinationSelect).then((response) => {
-        setSourceTextInput(response.rates[sourceSelect] * destinationTextInput)
+        setSourceTextInput((response.rates[sourceSelect] * destinationTextInput).toFixed(2))
       })
     }
   }
