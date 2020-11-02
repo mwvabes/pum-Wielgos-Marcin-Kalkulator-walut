@@ -1,0 +1,168 @@
+
+ [
+    {
+      "code": "AUD",
+      "fullName": "Australlian dollar",
+      "territory": "AU"
+    },
+    {
+      "code": "BGN",
+      "fullName": "Bulgarian lev",
+      "territory": "BG"
+    },
+    {
+      "code": "BRL",
+      "fullName": "Brazillian real",
+      "territory": "BR"
+    },
+    {
+      "code": "CAD",
+      "fullName": "Canadian dollar",
+      "territory": "CA"
+    },
+    {
+      "code": "CHF",
+      "fullName": "Swiss franc",
+      "territory": "Switzerland"
+    },
+    {
+      "code": "CNY",
+      "fullName": "Chinese yuan",
+      "territory": "CN"
+    },
+    {
+      "code": "CZK",
+      "fullName": "Czech koruna",
+      "territory": "CZ"
+    },
+    {
+      "code": "DKK",
+      "fullName": "Danish krone",
+      "territory": "DK"
+    },
+    {
+      "code": "EUR",
+      "fullName": "Euro",
+      "territory": "UE"
+    },
+    {
+      "code": "GBP",
+      "fullName": "British pound",
+      "territory": "GB"
+    },
+    {
+      "code": "HKD",
+      "fullName": "Hong kong dollar",
+      "territory": "HK"
+    },
+    {
+      "code": "HRK",
+      "fullName": "Croatian kuna",
+      "territory": "HR"
+    },
+    {
+      "code": "HUF",
+      "fullName": "Hungarian forint",
+      "territory": "HU"
+    },
+    {
+      "code": "IDR",
+      "fullName": "Indonesian rupiah",
+      "territory": "ID"
+    },
+    {
+      "code": "ILS",
+      "fullName": "Israeli new shekel",
+      "territory": "IL"
+    },
+    {
+      "code": "INR",
+      "fullName": "Indian rupee",
+      "territory": "IN"
+    },
+    {
+      "code": "ISK",
+      "fullName": "Icelandic króna",
+      "territory": "IS"
+    },
+    {
+      "code": "JPY",
+      "fullName": "Japanese yen",
+      "territory": "JP"
+    },
+    {
+      "code": "KRW",
+      "fullName": "South korean won",
+      "territory": "KR"
+    },
+    {
+      "code": "MXN",
+      "fullName": "Mexican peso",
+      "territory": "MX"
+    },
+    {
+      "code": "MYR",
+      "fullName": "Malaysian ringgit",
+      "territory": "MY"
+    },
+    {
+      "code": "NOK",
+      "fullName": "Norwegian krone",
+      "territory": "NO"
+    },
+    {
+      "code": "NZD",
+      "fullName": "New Zealand dollar",
+      "territory": "NZ"
+    },
+    {
+      "code": "PHP",
+      "fullName": "Philippine peso",
+      "territory": "PH"
+    },
+    {
+      "code": "PLN",
+      "fullName": "Polish złoty",
+      "territory": "PL"
+    },
+    {
+      "code": "RON",
+      "fullName": "Bulgarian lev",
+      "territory": "Australia"
+    },
+    {
+      "code": "RUB",
+      "fullName": "Romanian leu",
+      "territory": "RO"
+    },
+    {
+      "code": "SEK",
+      "fullName": "Swedish krona",
+      "territory": "SE"
+    },
+    {
+      "code": "SGD",
+      "fullName": "Singapore dollar",
+      "territory": "SG"
+    },
+    {
+      "code": "THB",
+      "fullName": "Thai baht",
+      "territory": "TH"
+    },
+    {
+      "code": "TRY",
+      "fullName": "Turkish lira",
+      "territory": "TR"
+    },
+    {
+      "code": "USD",
+      "fullName": "United States dollar",
+      "territory": "US"
+    },
+    {
+      "code": "ZAR",
+      "fullName": "South African rand",
+      "territory": "ZA"
+    }
+  ]
