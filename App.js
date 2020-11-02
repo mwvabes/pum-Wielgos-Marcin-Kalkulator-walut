@@ -16,6 +16,8 @@ const App = () => {
   const [destinationTextInput, setDestinationTextInput] = useState(0.00)
   const [sourceSelect, setSourceSelect] = useState("PLN")
   const [destinationSelect, setDestinationSelect] = useState("EUR")
+  const [destinationCurrencyValue, setDestinationCurrencyValue] = useState(null)
+  const [errorOccured, setErrorOccured] = useState(false)
 
   useEffect(() => {
     setCurrenciesNaming(currenciesNamingJSON)
@@ -33,8 +35,14 @@ const App = () => {
       !isNaN(sourceTextInput)
       &&
       !isNaN(destinationTextInput)
-    ) 
+    ) {
+      setErrorOccured(false)
       refreshCalculation()
+    } else {
+      setErrorOccured(true)
+    }
+      
+    
   }, [{sourceTextInput, sourceSelect, destinationSelect}])
 
   const handleTextInput = (text, type) => {
@@ -55,17 +63,24 @@ const App = () => {
 
   const refreshCalculation = () => {
       currenciesService.getByCurrencyValue(sourceSelect).then((response) => {
+        setDestinationCurrencyValue(response.rates[destinationSelect].toFixed(2))
         setDestinationTextInput((response.rates[destinationSelect] * sourceTextInput).toFixed(2))
       })
   }
 
   const swapValues = () => {
-    console.log("swap")
     let source = sourceSelect
-    console.log("source", sourceSelect)
-    console.log("destination", destinationSelect)
     setSourceSelect(destinationSelect)
     setDestinationSelect(source)
+  }
+
+  const clearInputs = () => {
+    setCurrenciesNaming(currenciesNamingJSON)
+    setSourceTextInput(0)
+    setDestinationTextInput(0)
+    setSourceSelect("PLN")
+    setDestinationSelect("EUR")
+    setErrorOccured(false)
   }
 
   return (
@@ -77,9 +92,12 @@ const App = () => {
         handleSelectInput={handleSelectInput}
         sourceTextInput={sourceTextInput}
         destinationTextInput={destinationTextInput}
+        destinationCurrencyValue={destinationCurrencyValue}
         swapValues={swapValues}
         sourceSelect={sourceSelect}
         destinationSelect={destinationSelect}
+        errorOccured={errorOccured}
+        clearInputs={clearInputs}
       />
       <Footer />
     </View>

@@ -2,13 +2,12 @@ import { StatusBar } from 'expo-status-bar'
 import React, { useState } from 'react'
 import { StyleSheet, Button, View, TextInput, Text } from 'react-native'
 import Icon from 'react-native-vector-icons/AntDesign'
-import InnerPicker from './InnerPicker'
 import { Picker } from '@react-native-picker/picker'
 
-const Card = ({ currenciesNaming, handleTextInput, handleSelectInput, sourceTextInput, destinationTextInput, sourceSelect, destinationSelect, swapValues }) => {
+const Card = ({ currenciesNaming, handleTextInput, handleSelectInput, sourceTextInput, destinationTextInput, sourceSelect, destinationSelect, destinationCurrencyValue, swapValues, clearInputs, errorOccured }) => {
 
   return (
-    <View style={styles.card}>
+    <View style={[styles.card, errorOccured ? styles.error : ""]}>
       <View style={styles.row}>
         <TextInput
           style={styles.textInput}
@@ -43,6 +42,13 @@ const Card = ({ currenciesNaming, handleTextInput, handleSelectInput, sourceText
           accessibilityLabel="Swap values"
         />
 
+        <Button
+          onPress={clearInputs}
+          title={<Icon name="closecircleo" size={30} color="#90A955" />}
+          color="none"
+          accessibilityLabel="Clear inputs"
+        />
+
       </View>
 
       <View style={styles.row}>
@@ -71,6 +77,15 @@ const Card = ({ currenciesNaming, handleTextInput, handleSelectInput, sourceText
         </Picker>
       </View>
 
+      <View style={styles.row}>
+      <Text>
+        {!errorOccured ? 
+        `1 ${sourceSelect} = ${destinationCurrencyValue} ${destinationSelect}`
+        :
+        `Error occured`}
+      </Text>
+
+      </View>
 
       <StatusBar style="auto" />
     </View>
@@ -93,6 +108,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     margin: 10,
     flexWrap: 'wrap',
+    borderWidth: 1,
+    borderColor: '#fafafa',
+    transition: 'background-color 175ms, border-color 175ms',
   },
   row: {
     flexDirection: 'row',
@@ -139,5 +157,9 @@ const styles = StyleSheet.create({
   dropDownStyle: {
     backgroundColor: '#fafafa',
     height: 300
+  },
+  error: {
+    borderColor: '#a10000',
+    backgroundColor: '#ffd4d4'
   }
 });
