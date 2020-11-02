@@ -6,16 +6,16 @@ import Card from './components/Card'
 import Footer from './components/Footer'
 import currenciesService from './services/currencies'
 import currenciesNamingJSON from './services/currenciesNaming.json'
+import { Picker } from '@react-native-picker/picker'
 
 const App = () => {
 
   const [currenciesNaming, setCurrenciesNaming] = useState([])
 
-  const [sourceTextInput, setSourceTextInput] = useState(0)
-  const [destinationTextInput, setDestinationTextInput] = useState(0)
-  const [sourceSelect, setSourceSelect] = useState(0)
-  const [destinationSelect, setDestinationSelect] = useState(0)
-  const [lastChangedType, setLastChangedType] = useState("source")
+  const [sourceTextInput, setSourceTextInput] = useState(0.00)
+  const [destinationTextInput, setDestinationTextInput] = useState(0.00)
+  const [sourceSelect, setSourceSelect] = useState("PLN")
+  const [destinationSelect, setDestinationSelect] = useState("EUR")
 
   useEffect(() => {
     setCurrenciesNaming(currenciesNamingJSON)
@@ -31,46 +31,39 @@ const App = () => {
       !isNaN(sourceTextInput)
       &&
       !isNaN(destinationTextInput)
-    ) {
-      if (lastChangedType == "destination" && destinationTextInput == 0) {
-        refreshCalculation("source")
-      } else {
-        refreshCalculation(lastChangedType)
-      }
-      
-    }
-  }, [{sourceTextInput, destinationTextInput, sourceSelect, destinationSelect}])
+    ) 
+      refreshCalculation()
+  }, [{sourceTextInput, sourceSelect, destinationSelect}])
 
   const handleTextInput = (text, type) => {
     if (type === "source") {
       setSourceTextInput(text)
-      setLastChangedType("source")
     } else {
       setDestinationTextInput(text)
-      setLastChangedType("destination")
     }
   }
 
   const handleSelectInput = (value, type) => {
     if (type === "source") {
       setSourceSelect(value)
-      setLastChangedType("source")
     } else {
       setDestinationSelect(value)
-      setLastChangedType("destination")
     }
   }
 
-  const refreshCalculation = (lastChangedType) => {
-    if (lastChangedType === "source") {
+  const refreshCalculation = () => {
       currenciesService.getByCurrencyValue(sourceSelect).then((response) => {
         setDestinationTextInput((response.rates[destinationSelect] * sourceTextInput).toFixed(2))
       })
-    } else {
-      currenciesService.getByCurrencyValue(destinationSelect).then((response) => {
-        setSourceTextInput((response.rates[sourceSelect] * destinationTextInput).toFixed(2))
-      })
-    }
+  }
+
+  const swapValues = () => {
+    console.log("swap")
+    let source = sourceSelect
+    console.log("source", sourceSelect)
+    console.log("destination", destinationSelect)
+    setSourceSelect(destinationSelect)
+    setDestinationSelect(source)
   }
 
   return (
@@ -82,6 +75,9 @@ const App = () => {
         handleSelectInput={handleSelectInput}
         sourceTextInput={sourceTextInput}
         destinationTextInput={destinationTextInput}
+        swapValues={swapValues}
+        sourceSelect={sourceSelect}
+        destinationSelect={destinationSelect}
       />
       <Footer />
     </View>

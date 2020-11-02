@@ -1,71 +1,76 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, TextInput } from 'react-native'
-import DropDownPicker from 'react-native-dropdown-picker'
+import { StyleSheet, Button, View, TextInput, Text } from 'react-native'
+import Icon from 'react-native-vector-icons/AntDesign'
+import InnerPicker from './InnerPicker'
+import { Picker } from '@react-native-picker/picker'
 
-const Card = ({currenciesNaming, handleTextInput, handleSelectInput, sourceTextInput, destinationTextInput}) =>  {
+const Card = ({ currenciesNaming, handleTextInput, handleSelectInput, sourceTextInput, destinationTextInput, sourceSelect, destinationSelect, swapValues }) => {
 
   return (
     <View style={styles.card}>
       <View style={styles.row}>
-      <TextInput
-        style={styles.textInput}
-        onChangeText={(text) => {handleTextInput(text, "source")}}
-        value={sourceTextInput}
-        keyboardType={"decimal-pad"}
+        <TextInput
+          style={styles.textInput}
+          onChangeText={(text) => { handleTextInput(text, "source") }}
+          value={sourceTextInput}
+          keyboardType={"decimal-pad"}
         />
 
-        <DropDownPicker
-            items={
-              currenciesNaming.map(function (currency) {
-                return {
-                label: `${currency.code} | ${currency.fullName.toUpperCase()}`,
-                value: currency.code
-                }
-              })
-            }
-            placeholder="Choose the currency..."
-            style={styles.selectInput}
-            itemStyle={{}}
-            //defaultValue={"PLN"}
-            containerStyle={{width: 250}}
-            dropDownStyle={styles.dropDownStyle, {zIndex: 9000}}
-            dropDownMaxHeight={250}
-            onChangeItem={(item) => {handleSelectInput(item.value, "source")}}
-            searchable={true}
-        />
+        <Picker
+          selectedValue={sourceSelect}
+          style={styles.selectInput}
+          onValueChange={(item, itemIndex) => { handleSelectInput(item, "source") }}
+        >
+          {
+            currenciesNaming.map((currency) => {
+              return <Picker.Item
+                label={`${currency.code} ${currency.fullName}`}
+                key={`${currency.code} ${currency.fullName}`}
+                value={`${currency.code}`}
+              />
+
+            })
+          }
+        </Picker>
       </View>
 
       <View style={styles.row}>
-      <TextInput
-        style={styles.textInput}
-        onChangeText={(text) => {handleTextInput(text, "destination")}}
-        value={destinationTextInput}
-        keyboardType={"decimal-pad"}
+        <Button
+          onPress={swapValues}
+          title={<Icon name="swap" size={30} color="#90A955" />}
+          color="none"
+          accessibilityLabel="Swap values"
         />
 
-        <DropDownPicker
-            zIndex={4000}
-            items={
-              currenciesNaming.map(function (currency) {
-                return {
-                label: `${currency.code} | ${currency.fullName.toUpperCase()}`,
-                value: currency.code
-                }
-              })
-            }
-            placeholder="Choose the currency..."
-            style={styles.selectInput}
-            itemStyle={{}}
-            //defaultValue={"EUR"}
-            containerStyle={{width: '250px'}}
-            dropDownStyle={styles.dropDownStyle, {zIndex: 9000}}
-            dropDownMaxHeight={250}
-            onChangeItem={(item) => {handleSelectInput(item.value, "destination")}}
-            searchable={true}
-        />
       </View>
-      
+
+      <View style={styles.row}>
+        <TextInput
+          style={[styles.textInput, styles.disabledInput]}
+          value={destinationTextInput}
+          keyboardType={"decimal-pad"}
+          editable={false}
+        />
+
+        <Picker
+          selectedValue={destinationSelect}
+          style={styles.selectInput}
+          onValueChange={(item, itemIndex) => { handleSelectInput(item, "destination") }}
+        >
+          {
+            currenciesNaming.map((currency) => {
+              return <Picker.Item
+                label={`${currency.code} ${currency.fullName}`}
+                key={`${currency.code} ${currency.fullName}`}
+                value={`${currency.code}`}
+              />
+
+            })
+          }
+        </Picker>
+      </View>
+
 
       <StatusBar style="auto" />
     </View>
@@ -109,8 +114,11 @@ const styles = StyleSheet.create({
       borderColor: '#90A955',
     }
   },
+  disabledInput: {
+    backgroundColor: "#dcdcdc"
+  },
   selectInput: {
-    flex: 1,
+    flex: 2,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',

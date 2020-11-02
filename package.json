@@ -8,6 +8,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-picker/picker": "^1.9.0",
     "axios": "^0.21.0",
     "expo": "~39.0.2",
     "expo-cli": "^3.28.2",
@@ -17,12 +18,11 @@
     "i18next": "^19.8.3",
     "i18next-browser-languagedetector": "^6.0.1",
     "json-loader": "^0.5.7",
-    "netlify-cli": "^2.67.0",
+    "netlify-cli": "^2.67.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-i18next": "^11.7.3",
     "react-native": "~0.63.3",
-    "react-native-dropdown-picker": "^3.7.1",
     "react-native-gesture-handler": "~1.7.0",
     "react-native-reanimated": "~1.13.0",
     "react-native-screens": "~2.10.1",
@@ -30,7 +30,7 @@
     "react-native-web": "~0.13.12"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0",
+    "@babel/core": "^7.9.6",
     "babel-jest": "~25.2.6",
     "jest": "~25.2.6",
     "react-test-renderer": "~16.13.1"
