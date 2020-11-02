@@ -12,6 +12,7 @@ const Card = ({currenciesNaming, handleTextInput, handleSelectInput, sourceTextI
         style={styles.textInput}
         onChangeText={(text) => {handleTextInput(text, "source")}}
         value={sourceTextInput}
+        keyboardType={"decimal-pad"}
         />
 
         <DropDownPicker
@@ -40,6 +41,7 @@ const Card = ({currenciesNaming, handleTextInput, handleSelectInput, sourceTextI
         style={styles.textInput}
         onChangeText={(text) => {handleTextInput(text, "destination")}}
         value={destinationTextInput}
+        keyboardType={"decimal-pad"}
         />
 
         <DropDownPicker
@@ -89,6 +91,7 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
+    flexWrap: 'wrap'
   },
   textInput: {
     flex: 1,
