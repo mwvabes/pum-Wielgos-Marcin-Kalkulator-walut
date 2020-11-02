@@ -24,6 +24,8 @@ const App = () => {
   useEffect(() => {
 
     if (
+      (sourceSelect != destinationSelect)
+      &&
       currenciesNaming.some(currency => currency.code == sourceSelect )
       &&
       currenciesNaming.some(currency => currency.code == destinationSelect )
