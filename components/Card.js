@@ -3,8 +3,17 @@ import React, { useState } from 'react'
 import { StyleSheet, Button, View, TextInput, Text } from 'react-native'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { Picker } from '@react-native-picker/picker'
+import CardInfo from './CardInfo'
 
-const Card = ({ currenciesNaming, handleTextInput, handleSelectInput, sourceTextInput, destinationTextInput, sourceSelect, destinationSelect, destinationCurrencyValue, swapValues, clearInputs, errorOccured }) => {
+const Card = ({ currenciesNaming, handleTextInput, handleSelectInput, sourceTextInput, destinationTextInput, sourceSelect, destinationSelect, destinationCurrencyValue, swapValues, clearInputs, errorOccured, sourceFlag, destinationFlag }) => {
+
+
+  const handleFlag = () => {
+    return <img
+    alt="United States"
+    src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/${sourceFlag}.svg}`} height={15} 
+    />
+  } 
 
   return (
     <View style={[styles.card, errorOccured ? styles.error : ""]}>
@@ -78,13 +87,7 @@ const Card = ({ currenciesNaming, handleTextInput, handleSelectInput, sourceText
       </View>
 
       <View style={styles.row}>
-      <Text>
-        {!errorOccured ? 
-        `1 ${sourceSelect} = ${destinationCurrencyValue} ${destinationSelect}`
-        :
-        `Error occured`}
-      </Text>
-
+        <CardInfo errorOccured={errorOccured} sourceSelect={sourceSelect} destinationSelect={destinationSelect} destinationCurrencyValue={destinationCurrencyValue} sourceFlag={sourceFlag} destinationFlag={destinationFlag} />
       </View>
 
       <StatusBar style="auto" />
@@ -115,6 +118,9 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     flexWrap: 'wrap'
+  },
+  flag: {
+    height: 20
   },
   textInput: {
     flex: 1,

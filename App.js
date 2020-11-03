@@ -19,6 +19,9 @@ const App = () => {
   const [destinationCurrencyValue, setDestinationCurrencyValue] = useState(null)
   const [errorOccured, setErrorOccured] = useState(false)
 
+  const [sourceFlag, setSourceFlag] = useState("PL")
+  const [destinationFlag, setDestinationFlag] = useState("US")
+
   useEffect(() => {
     setCurrenciesNaming(currenciesNamingJSON)
   })
@@ -37,6 +40,8 @@ const App = () => {
       !isNaN(destinationTextInput)
     ) {
       setErrorOccured(false)
+      setSourceFlag(findTerritoryByCurrencyCode(sourceSelect))
+      setDestinationFlag(findTerritoryByCurrencyCode(destinationSelect))
       refreshCalculation()
     } else {
       setErrorOccured(true)
@@ -83,6 +88,14 @@ const App = () => {
     setErrorOccured(false)
   }
 
+  const findTerritoryByCurrencyCode = (currencyCode) => {
+    const matching = currenciesNamingJSON.find((currency) => {
+      return currency.code === currencyCode
+    })
+    console.log(matching)
+    return matching.territory
+  }
+
   return (
     <View style={styles.container}>
       <Header />
@@ -98,6 +111,8 @@ const App = () => {
         destinationSelect={destinationSelect}
         errorOccured={errorOccured}
         clearInputs={clearInputs}
+        sourceFlag={sourceFlag}
+        destinationFlag={destinationFlag}
       />
       <Footer />
     </View>
