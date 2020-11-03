@@ -11,12 +11,12 @@ const Card = ({ errorOccured, sourceSelect, destinationSelect, destinationCurren
   console.log("des", destinationFlag)
 
   function HandleSourceFlag(props) {
-    return <img alt="United States"
+    return <img alt="Source currency country flag"
     src={"http://purecatamphetamine.github.io/country-flag-icons/3x2/" + sourceFlag + ".svg"} height={15} style={{border: '1px solid #e0e0e0'}} />
   }
 
   function HandleDestinationFlag(props) {
-    return <img alt="United States"
+    return <img alt="Destination currency country flag"
     src={"http://purecatamphetamine.github.io/country-flag-icons/3x2/" + destinationFlag + ".svg"} height={15} style={{border: '1px solid #e0e0e0'}} />
   }
 
