@@ -43,7 +43,7 @@ const App = () => {
             "destinationCurrency"	TEXT,
             PRIMARY KEY("ID_entity")
           );`,
-        [sourceValue, sourceCurrency, destinationCurrency],
+        [],
         (success, result) => {
           setHistoryKey(historyKey + 1)
         },
