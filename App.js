@@ -36,7 +36,7 @@ const App = () => {
   useEffect(() => {
     db.transaction(tx => {
       tx.executeSql(
-        `CREATE TABLE "history" IF NOT EXISTS (
+        `CREATE TABLE IF NOT EXISTS "history" (
             "ID_entity"	INTEGER,
             "sourceValue"	TEXT,
             "sourceCurrency"	TEXT,
@@ -45,7 +45,7 @@ const App = () => {
           );`,
         [],
         (success, result) => {
-          setHistoryKey(historyKey + 1)
+          
         },
         (error, result) => {
           console.log("er tx", error, result)
