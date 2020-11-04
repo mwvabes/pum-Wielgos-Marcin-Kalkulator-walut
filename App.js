@@ -31,8 +31,31 @@ const App = () => {
 
   useEffect(() => {
     setCurrenciesNaming(currenciesNamingJSON)
-
   })
+
+  useEffect(() => {
+    db.transaction(tx => {
+      tx.executeSql(
+        `CREATE TABLE "history" IF NOT EXISTS (
+            "ID_entity"	INTEGER,
+            "sourceValue"	TEXT,
+            "sourceCurrency"	TEXT,
+            "destinationCurrency"	TEXT,
+            PRIMARY KEY("ID_entity")
+          );`,
+        [sourceValue, sourceCurrency, destinationCurrency],
+        (success, result) => {
+          setHistoryKey(historyKey + 1)
+        },
+        (error, result) => {
+          console.log("er tx", error, result)
+        })
+    }, error => {
+      console.log("error", error)
+    }, (success, result) => {
+
+    })
+  }, [])
 
   useEffect(() => {
 
@@ -104,28 +127,6 @@ const App = () => {
   }
 
   const handleAdd = (sourceValue, sourceCurrency, destinationCurrency) => {
-    db.transaction(tx => {
-      tx.executeSql(
-        `CREATE TABLE "history" IF NOT EXISTS (
-          "ID_entity"	INTEGER,
-          "sourceValue"	TEXT,
-          "sourceCurrency"	TEXT,
-          "destinationCurrency"	TEXT,
-          PRIMARY KEY("ID_entity")
-        );`,
-        [sourceValue, sourceCurrency, destinationCurrency],
-        (success, result) => {
-          setHistoryKey(historyKey + 1)
-        },
-        (error, result) => {
-          console.log("er tx", error, result)
-        })
-    }, error => {
-      console.log("error", error)
-    }, (success, result) => {
-
-    })
-
     db.transaction(tx => {
       tx.executeSql(
         `INSERT INTO HISTORY (sourceValue, sourceCurrency, destinationCurrency) VALUES (?, ?, ?)`,
