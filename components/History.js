@@ -21,10 +21,10 @@ const History = ({ findTerritoryByCurrencyCode }) => {
           setItems(Object.values(result.rows))
         },
         (error, result) => {
-          console.log("er tx", error, result)
+          //console.log("er tx", error, result)
         })
     }, error => {
-      console.log("error", error)
+      //console.log("error", error)
     }, (success, result) => {
 
     })
@@ -39,10 +39,10 @@ const History = ({ findTerritoryByCurrencyCode }) => {
           loadHistory()
         },
         (error, result) => {
-          console.log("er tx", error, result)
+          //console.log("er tx", error, result)
         })
     }, error => {
-      console.log("error", error)
+      //console.log("error", error)
     }, (success, result) => {
 
     })

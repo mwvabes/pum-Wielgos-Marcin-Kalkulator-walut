@@ -14,7 +14,7 @@ const HistoryEntity = ({ item, handleDelete, findTerritoryByCurrencyCode }) => {
     setDestinationFlag(findTerritoryByCurrencyCode(item.destinationCurrency))
   })
 
-  console.log(item)
+  //console.log(item)
 
   const [destinationCurrencyValue, setDestinationCurrencyValue] = useState(null)
   const [destinationTextInput, setDestinationTextInput] = useState(null)

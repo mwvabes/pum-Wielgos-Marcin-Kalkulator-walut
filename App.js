@@ -48,10 +48,10 @@ const App = () => {
           
         },
         (error, result) => {
-          console.log("er tx", error, result)
+          //console.log("er tx", error, result)
         })
     }, error => {
-      console.log("error", error)
+      //console.log("error", error)
     }, (success, result) => {
 
     })
@@ -135,10 +135,10 @@ const App = () => {
           setHistoryKey(historyKey + 1)
         },
         (error, result) => {
-          console.log("er tx", error, result)
+          //console.log("er tx", error, result)
         })
     }, error => {
-      console.log("error", error)
+      //console.log("error", error)
     }, (success, result) => {
 
     })
