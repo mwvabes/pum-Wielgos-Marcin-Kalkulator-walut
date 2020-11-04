@@ -7,9 +7,6 @@ import Flags from 'country-flag-icons/react/3x2'
 
 const Card = ({ errorOccured, sourceSelect, destinationSelect, destinationCurrencyValue, sourceFlag, destinationFlag }) => {
 
-  console.log("source", sourceFlag)
-  console.log("des", destinationFlag)
-
   function HandleSourceFlag(props) {
     return <img alt="Source currency country flag"
     src={"http://purecatamphetamine.github.io/country-flag-icons/3x2/" + sourceFlag + ".svg"} height={15} style={{border: '1px solid #e0e0e0'}} />

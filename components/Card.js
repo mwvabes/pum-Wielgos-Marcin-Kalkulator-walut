@@ -5,18 +5,14 @@ import Icon from 'react-native-vector-icons/AntDesign'
 import { Picker } from '@react-native-picker/picker'
 import CardInfo from './CardInfo'
 
-const Card = ({ currenciesNaming, handleTextInput, handleSelectInput, sourceTextInput, destinationTextInput, sourceSelect, destinationSelect, destinationCurrencyValue, swapValues, clearInputs, errorOccured, sourceFlag, destinationFlag }) => {
+const Card = ({ currenciesNaming, handleTextInput, handleSelectInput, sourceTextInput, destinationTextInput, sourceSelect, destinationSelect, destinationCurrencyValue, swapValues, clearInputs, errorOccured, sourceFlag, destinationFlag, handleAdd }) => {
 
-
-  const handleFlag = () => {
-    return <img
-    alt="United States"
-    src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/${sourceFlag}.svg}`} height={15} 
-    />
-  } 
 
   return (
     <View style={[styles.card, errorOccured ? styles.error : ""]}>
+    <View style={styles.row}>
+      <Text style={styles.heading}>Currency converter</Text>
+    </View>
       <View style={styles.row}>
         <TextInput
           style={styles.textInput}
@@ -45,6 +41,12 @@ const Card = ({ currenciesNaming, handleTextInput, handleSelectInput, sourceText
 
       <View style={styles.row}>
         <Button
+          onPress={() => { handleAdd(sourceTextInput, sourceSelect, destinationSelect)}}
+          title={<Icon name="plussquareo" size={30} color="#90A955" />}
+          color="none"
+          accessibilityLabel="Add to history"
+        />
+        <Button
           onPress={swapValues}
           title={<Icon name="swap" size={30} color="#90A955" />}
           color="none"
@@ -57,7 +59,6 @@ const Card = ({ currenciesNaming, handleTextInput, handleSelectInput, sourceText
           color="none"
           accessibilityLabel="Clear inputs"
         />
-
       </View>
 
       <View style={styles.row}>
@@ -104,16 +105,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 16,
-    padding: 5,
+    padding: 25,
     boxShadow: "0px 2px 10px #e0e0e0",
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     margin: 10,
     flexWrap: 'wrap',
-    borderWidth: 1,
-    borderColor: '#fafafa',
+    borderWidth: 2,
+    borderColor: '#66870f',
     transition: 'background-color 175ms, border-color 175ms',
+    fontSize: 20,
+    backgroundImage: 'url(https://imgur.com/DlMJb1j.jpg)'
   },
   row: {
     flexDirection: 'row',
@@ -133,13 +136,14 @@ const styles = StyleSheet.create({
     boxShadow: "0px 2px 10px #e0e0e0",
     margin: 5,
     borderColor: '#e0e0e0',
-    borderWidth: 2,
-    '& active': {
-      borderColor: '#90A955',
-    }
+    borderWidth: 1,
+    minWidth: 180,
+    borderColor: '#90A955',
+    width: 200
   },
   disabledInput: {
-    backgroundColor: "#dcdcdc"
+    backgroundColor: "#ecfcc2",
+    fontWeight: 'bold'
   },
   selectInput: {
     flex: 2,
@@ -154,11 +158,9 @@ const styles = StyleSheet.create({
     boxShadow: "0px 2px 10px #e0e0e0",
     position: 'relative',
     margin: 5,
-    borderColor: '#e0e0e0',
-    borderWidth: 2,
-    '& active': {
-      borderColor: '#90A955',
-    }
+    borderWidth: 1,
+    borderColor: '#90A955',
+    width: 200
   },
   dropDownStyle: {
     backgroundColor: '#fafafa',
@@ -167,5 +169,9 @@ const styles = StyleSheet.create({
   error: {
     borderColor: '#a10000',
     backgroundColor: '#ffd4d4'
+  },
+  heading: {
+    fontSize: '1.6rem',
+    fontWeight: 'bold'
   }
 });

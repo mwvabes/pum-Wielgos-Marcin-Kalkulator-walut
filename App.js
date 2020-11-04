@@ -3,10 +3,13 @@ import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import Header from './components/Header'
 import Card from './components/Card'
+import History from './components/History'
 import Footer from './components/Footer'
 import currenciesService from './services/currencies'
 import currenciesNamingJSON from './services/currenciesNaming.json'
-import { Picker } from '@react-native-picker/picker'
+import * as SQLite from 'expo-sqlite'
+
+const db = SQLite.openDatabase("currency_db")
 
 const App = () => {
 
@@ -19,11 +22,16 @@ const App = () => {
   const [destinationCurrencyValue, setDestinationCurrencyValue] = useState(null)
   const [errorOccured, setErrorOccured] = useState(false)
 
+  const [historyKey, setHistoryKey] = useState(0)
+
+  const [database, setDatabase] = useState()
+
   const [sourceFlag, setSourceFlag] = useState("PL")
   const [destinationFlag, setDestinationFlag] = useState("US")
 
   useEffect(() => {
     setCurrenciesNaming(currenciesNamingJSON)
+
   })
 
   useEffect(() => {
@@ -31,9 +39,9 @@ const App = () => {
     if (
       (sourceSelect != destinationSelect)
       &&
-      currenciesNaming.some(currency => currency.code == sourceSelect )
+      currenciesNaming.some(currency => currency.code == sourceSelect)
       &&
-      currenciesNaming.some(currency => currency.code == destinationSelect )
+      currenciesNaming.some(currency => currency.code == destinationSelect)
       &&
       !isNaN(sourceTextInput)
       &&
@@ -46,9 +54,9 @@ const App = () => {
     } else {
       setErrorOccured(true)
     }
-      
-    
-  }, [{sourceTextInput, sourceSelect, destinationSelect}])
+
+
+  }, [{ sourceTextInput, sourceSelect, destinationSelect }])
 
   const handleTextInput = (text, type) => {
     if (type === "source") {
@@ -67,10 +75,10 @@ const App = () => {
   }
 
   const refreshCalculation = () => {
-      currenciesService.getByCurrencyValue(sourceSelect).then((response) => {
-        setDestinationCurrencyValue(response.rates[destinationSelect].toFixed(2))
-        setDestinationTextInput((response.rates[destinationSelect] * sourceTextInput).toFixed(2))
-      })
+    currenciesService.getByCurrencyValue(sourceSelect).then((response) => {
+      setDestinationCurrencyValue(response.rates[destinationSelect].toFixed(2))
+      setDestinationTextInput((response.rates[destinationSelect] * sourceTextInput).toFixed(2))
+    })
   }
 
   const swapValues = () => {
@@ -92,13 +100,31 @@ const App = () => {
     const matching = currenciesNamingJSON.find((currency) => {
       return currency.code === currencyCode
     })
-    console.log(matching)
     return matching.territory
+  }
+
+  const handleAdd = (sourceValue, sourceCurrency, destinationCurrency) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        `INSERT INTO HISTORY (sourceValue, sourceCurrency, destinationCurrency) VALUES (?, ?, ?)`,
+        [sourceValue, sourceCurrency, destinationCurrency],
+        (success, result) => {
+          setHistoryKey(historyKey + 1)
+        },
+        (error, result) => {
+          console.log("er tx", error, result)
+        })
+    }, error => {
+      console.log("error", error)
+    }, (success, result) => {
+
+    })
   }
 
   return (
     <View style={styles.container}>
       <Header />
+      <View style={styles.paddingFromTop}></View>
       <Card
         currenciesNaming={currenciesNaming}
         handleTextInput={handleTextInput}
@@ -113,7 +139,9 @@ const App = () => {
         clearInputs={clearInputs}
         sourceFlag={sourceFlag}
         destinationFlag={destinationFlag}
+        handleAdd={handleAdd}
       />
+      <History findTerritoryByCurrencyCode={findTerritoryByCurrencyCode} key={"history" + historyKey} />
       <Footer />
     </View>
   )
@@ -126,10 +154,10 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
     zIndex: 1
   },
+  paddingFromTop: {
+    padding: 30
+  }
 });

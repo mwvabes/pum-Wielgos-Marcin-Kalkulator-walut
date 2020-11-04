@@ -14,6 +14,7 @@
     "expo": "~39.0.2",
     "expo-cli": "^3.28.2",
     "expo-splash-screen": "~0.6.2",
+    "expo-sqlite": "^8.4.0",
     "expo-status-bar": "~1.0.2",
     "expo-updates": "~0.3.2",
     "i18next": "^19.8.3",
