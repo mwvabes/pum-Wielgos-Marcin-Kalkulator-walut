@@ -53,7 +53,12 @@ const History = ({ findTerritoryByCurrencyCode }) => {
       <Text style={styles.heading}>{ items.length > 0 ? "History" : ""} </Text>
       {
         items.slice(0).reverse().map(item => {
-          return <HistoryEntity key={item.ID_entity} item={item} handleDelete={handleDelete} findTerritoryByCurrencyCode={findTerritoryByCurrencyCode} />
+          return <HistoryEntity 
+            key={item.ID_entity} 
+            item={item} 
+            handleDelete={handleDelete} 
+            findTerritoryByCurrencyCode={findTerritoryByCurrencyCode} 
+          />
         })
       }
     </View>
