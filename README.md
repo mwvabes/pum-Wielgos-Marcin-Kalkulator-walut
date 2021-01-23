@@ -13,7 +13,7 @@ Rok akademicki 2020/2021, Uniwersytet Rzeszowski
 
 ## Made with
 
-  > React Native
+  > React Native, SQLite
 
 
 Copyright by Marcin Wielgos
