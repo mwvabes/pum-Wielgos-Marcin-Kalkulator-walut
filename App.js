@@ -7,6 +7,7 @@ import History from './components/History'
 import Footer from './components/Footer'
 import currenciesService from './services/currencies'
 import currenciesNamingJSON from './services/currenciesNaming.json'
+import MetaTags from 'react-meta-tags';
 import * as SQLite from 'expo-sqlite'
 
 const db = SQLite.openDatabase("currency_db")
@@ -45,7 +46,7 @@ const App = () => {
           );`,
         [],
         (success, result) => {
-          
+
         },
         (error, result) => {
           //console.log("er tx", error, result)
@@ -146,6 +147,9 @@ const App = () => {
 
   return (
     <View style={styles.container}>
+      <MetaTags>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+      </MetaTags>
       <Header />
       <View style={styles.paddingFromTop}></View>
       <Card
