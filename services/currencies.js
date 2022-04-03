@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://api.exchangeratesapi.io/latest?access_key=b7abf2f3cd75f3c6545549acf84111cb'
+const baseUrl = 'https://api.exchangeratesapi.io/latest'
 //const baseUrl = 'http://api.nbp.pl/api/exchangerates/tables/A/?format=json'
 
 const getAll = () => {
@@ -8,7 +8,7 @@ const getAll = () => {
 }
 
 const getByCurrencyValue = (value) => {
-  const request = axios.get(`${baseUrl}&symbols=${value}`).catch(error => console.log(error))
+  const request = axios.get(`${baseUrl}?symbols=${value}`).catch(error => console.log(error))
   return request.then(response => response.data)
 }
 
