@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'https://api.exchangeratesapi.io/latest?access_key=b7abf2f3cd75f3c6545549acf84111cb'
+const baseUrl = 'http://api.exchangeratesapi.io/latest?access_key=b7abf2f3cd75f3c6545549acf84111cb'
 //const baseUrl = 'http://api.nbp.pl/api/exchangerates/tables/A/?format=json'
 
 const getAll = () => {
