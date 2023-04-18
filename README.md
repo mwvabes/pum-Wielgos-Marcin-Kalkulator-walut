@@ -1,4 +1,4 @@
-# Kalkulator walut
+# Currency converter | Kalkulator walut
 
 ## Projekt
 
